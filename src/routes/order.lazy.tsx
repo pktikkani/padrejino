@@ -2,24 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { CartContext } from "../contexts";
 import Cart from "../Cart";
-import Pizza from "../Pizza";
+import PizzaComp from "../PizzaComp.tsx";
 import * as React from "react";
+import { type Pizza } from "../types/types.ts";
 
-// Pizza related types
-interface PizzaSizes {
-    S?: number;
-    M?: number;
-    L?: number;
-}
-
-interface Pizza {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    image: string;
-    sizes: PizzaSizes;
-}
 
 // Cart related types
 type PizzaSize = "S" | "M" | "L";
@@ -63,9 +49,11 @@ function Order() {
     let selectedPizza: Pizza | undefined;
     if (!loading) {
         selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
-        price = intl.format(
-            selectedPizza?.sizes?.[pizzaSize] ?? 0
-        );
+
+        // Add a type guard
+        if (selectedPizza) {
+            price = intl.format(selectedPizza.sizes[pizzaSize]);
+        }
     }
 
     useEffect(() => {
@@ -153,7 +141,7 @@ function Order() {
                         <h3>LOADING …</h3>
                     ) : selectedPizza ? (
                         <div className="order-pizza">
-                            <Pizza
+                            <PizzaComp
                                 name={selectedPizza.name}
                                 description={selectedPizza.description}
                                 image={selectedPizza.image}

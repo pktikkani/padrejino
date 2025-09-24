@@ -1,14 +1,12 @@
-interface PizzaProps {
-    id?: string;
+import { type Pizza } from './types/types.ts';
+
+interface PizzaProps extends Partial<Pizza> {
     name: string;
-    category?: string;
     description: string;
-    image?: string;
-    sizes?: Record<string, number>;
 }
 
 
-const Pizza = (props: PizzaProps) => {
+const PizzaComp = (props: PizzaProps) => {
     return (
         <div className="pizza">
             <h1>{props.name}</h1>
@@ -18,4 +16,4 @@ const Pizza = (props: PizzaProps) => {
     );
 };
 
-export default Pizza;
+export default PizzaComp;

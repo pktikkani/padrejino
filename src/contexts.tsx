@@ -1,27 +1,7 @@
 import { createContext, type Dispatch, type SetStateAction } from "react";
+import type {CartItem} from "./types/types.ts";
 
 // Define your types
-interface Pizza {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    image: string;
-    sizes: {
-        S?: number;
-        M?: number;
-        L?: number;
-    };
-}
-
-export type PizzaSize = "S" | "M" | "L";
-
-export interface CartItem {
-    pizza: Pizza;
-    size: string;
-    price?: string;
-}
-
 type CartContextType = [
     CartItem[],
     Dispatch<SetStateAction<CartItem[]>>
@@ -29,5 +9,7 @@ type CartContextType = [
 
 export const CartContext = createContext<CartContextType>([
     [],
-    () => {}
+    () => {
+        throw new Error("CartContext used outside provider");
+    }
 ]);

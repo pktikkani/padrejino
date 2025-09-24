@@ -1,25 +1,11 @@
-import Pizza from "./Pizza.tsx";
+import { type CartItem } from './types/types.ts';
+
 
 const intl = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
 });
 
-interface Pizza {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    image: string;
-    sizes: Record<string, number>; // { S: 12.50, M: 16.50, L: 20.50 }
-}
-
-
-export interface CartItem {
-    pizza: Pizza;
-    size: string; // "S" | "M" | "L" etc.
-    price?: string; // Optional since you're calculating from pizza.sizes[size]
-}
 
 interface CartProps {
     cart: CartItem[];
