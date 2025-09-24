@@ -4,7 +4,7 @@ import PizzaOfTheDay from "../PizzaOfTheDay.tsx";
 import {useState} from "react";
 import { CartContext } from "../contexts.tsx";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
-import type {CartItem} from "../Cart.tsx";
+import { type CartItem } from '../types/types.ts'
 
 export const Route = createRootRoute({
   component: RootComponent,
